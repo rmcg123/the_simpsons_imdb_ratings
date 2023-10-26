@@ -108,9 +108,9 @@ def main():
             save_dir="results/",
         )
 
-    # Do the same for the top 10 rated individual episodes.
-    top_eps = episodes_df.sort_values(by=["av_rating"], ascending=False).head(
-        10
+    # Do the same but for all episodes that are rated 9 or above.
+    top_eps = episodes_df.loc[episodes_df["av_rating"].ge(9.0), :].sort_values(
+        by="av_rating", ascending=False
     )
     for stat in ["counts", "share"]:
         bf.plot_rating_dist_barplot(
